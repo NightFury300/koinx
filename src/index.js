@@ -17,7 +17,8 @@ connectDB()
     console.log("MONGO db connection failed !!! ", err);
 })
 
-cron.schedule('* */2 * * *', async () => {
+await saveCryptoDataToDB();
+cron.schedule('0 */2 * * *', async () => {
     console.log('Fetching and saving cryptocurrency data...');
     await saveCryptoDataToDB();
-  });
+});

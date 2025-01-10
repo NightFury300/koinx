@@ -4,8 +4,7 @@ import { fetchCryptoData } from "./fetchCryptoData.js";
 export async function saveCryptoDataToDB(){
     try{
         const cryptoData = await fetchCryptoData();
-        console.log(cryptoData);
-        
+
         const addedDocuments = [];
         for (const [coinName, coin] of Object.entries(cryptoData)) {
             const coin = cryptoData[coinName];
@@ -14,7 +13,7 @@ export async function saveCryptoDataToDB(){
             price: coin.usd,
             market_cap: coin.usd_market_cap,
             change_24h: coin.usd_24h_change});
-            addedDocuments.push(cryptoData)
+            addedDocuments.push(cryptoDoc)
         }
         return addedDocuments;
     }catch (error) {
