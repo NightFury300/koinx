@@ -1,8 +1,8 @@
 import { app } from "./app.js";
 import dotenv from "dotenv"
 import connectDB from "./db/index.js";
-import { fetchCryptoData } from "./services/fetchCryptoData.js";
 import { saveCryptoDataToDB } from "./services/saveCryptoData.js";
+import cron from "node-cron"
 
 dotenv.config({
     path: './env'
@@ -17,3 +17,7 @@ connectDB()
     console.log("MONGO db connection failed !!! ", err);
 })
 
+cron.schedule('* */2 * * *', async () => {
+    console.log('Fetching and saving cryptocurrency data...');
+    await saveCryptoDataToDB();
+  });
